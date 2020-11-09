@@ -50,13 +50,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: install dependencies
+        working-directory: ./api
+        run: npm install
       - name: setup typescript
         uses: icrawl/action-tsc@v1
         with:
           project: ./api
-      - name: install dependencies
-        working-directory: ./api
-        run: npm install
       - name: Serverless deploy
         uses: serverless/github-action@master
         with:
