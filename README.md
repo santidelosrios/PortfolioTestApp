@@ -15,6 +15,7 @@ npm run start
 ## API 
 The API is already deploy in AWS with two lambdas and exposed with an API Gateway.
 
+HOST: https://agspzq0cx8.execute-api.us-east-2.amazonaws.com/dev/
 Resource: /user-portfolio
 1. METHOD: GET; path params: {id}; PATH: /user-portfolio/{id}
 2. METHOD: PUT; path params: {id}; PATH: /user-portfolio/{id}; Expected body: 
