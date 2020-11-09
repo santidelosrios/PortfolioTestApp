@@ -44,9 +44,9 @@ jobs:
       - name: install dependencies
         working-directory: ./api
         run: npm install
+      - name: Serverless install
+        working-directory: ./api
+        run: npm install serverless
       - name: Serverless deploy
         working-directory: ./api
-        uses: serverless/github-action@v1.53.0
-        with:
-          args: deploy
-        run: ls
+        run: sls deploy
