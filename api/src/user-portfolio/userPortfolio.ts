@@ -7,10 +7,6 @@ export const sendResponse = (response: any, statusCode: number): any => (
   {
     statusCode,
     body: JSON.stringify(response),
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': true,
-    }
   }
 )
 

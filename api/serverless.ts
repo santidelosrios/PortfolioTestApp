@@ -95,7 +95,6 @@ const serverlessConfiguration: Serverless = {
           http: {
             method: 'get',
             path: 'user-portfolio/{id}',
-            cors: true,
           }
         },
       ]
@@ -107,7 +106,6 @@ const serverlessConfiguration: Serverless = {
           http: {
             method: 'put',
             path: 'user-portfolio/{id}',
-            cors: true,
           }
         }
       ]
