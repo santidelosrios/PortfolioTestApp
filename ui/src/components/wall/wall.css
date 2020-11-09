@@ -1,0 +1,20 @@
+.wall-container {
+  border: 1px solid #64a1a5;
+  background-color: #64a1a5;
+  box-shadow: 2px 2px #b4d8da;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.wall-container .wall-title {
+  width: 100%;
+  border-bottom: 1px solid #b4d8da;
+  color: #f7ae7e;
+  font-size: calc(5px + 2vmin);
+}
+
+.wall-container .wall-body {
+  margin-top: 15px;
+  width: 100%;
+}
