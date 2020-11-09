@@ -31,6 +31,9 @@ jobs:
         run: npm run test
   deploy:
     name: deploy
+    strategy:
+      matrix:
+        node-version: [12.x]
     runs-on: ubuntu-latest
     needs: test
     env:
@@ -43,6 +46,10 @@ jobs:
       TW_ACCESS_TOKEN_SECRET: ${{ secrets.TW_ACCESS_TOKEN_SECRET }}
     steps:
       - uses: actions/checkout@v1
+      - name: Set up NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
       - name: install dependencies
         working-directory: ./api
         run: npm install
