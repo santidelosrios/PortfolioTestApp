@@ -87,4 +87,6 @@ To test how the development process works, follow these steps:
 4. Go to the actions bar in Github and watch the CI/CD process run
 5. Test the function at POST `https://agspzq0cx8.execute-api.us-east-2.amazonaws.com/dev/user-portfolio/1` using Postman.
 
+**Aditional note: The PUT /user-portfolio resource is not integrated in the UI, it can be tested in Postman**
+
 

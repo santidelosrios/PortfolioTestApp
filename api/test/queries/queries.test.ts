@@ -1,14 +1,4 @@
-import { getTweets, getUserPortfolio } from '../../queries/queries'
-import aws from 'aws-sdk'
-
-const config = {
-  convertEmptyValues: true,
-  endpoint: 'localhost:8000',
-  sslEnabled: false,
-  region: 'local'
-};
-
-const ddb = new aws.DynamoDB.DocumentClient(config);
+import { getTweets } from '../../queries/queries'
 
 describe('Test queries functions', () => {
   test('test getTweets. Expect array with tweets', () => {
@@ -44,7 +34,7 @@ describe('Test queries functions', () => {
     return getTweets('test1', 'Title 1').then(data => expect(data).toEqual(expected))
   })
   test('test getTweets. Expect fail in request', () => {
-    return getTweets('test2', 'title 1').catch(err => expect(err).toBe('Something went wrong'))
+    return getTweets('test2', 'title 1').catch(err => expect(err).toEqual({err: 'Something went wrong', source: 'getTweets'}))
   })
   //NOTE: There was a problem with the mocking of DynamoDB that I could not solve, leaving one of the tests to show how it would be done.
   // test('test getUserPortfolio, Expect item', async () => {
