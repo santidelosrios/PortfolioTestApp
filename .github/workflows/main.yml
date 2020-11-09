@@ -53,6 +53,7 @@ jobs:
       - name: install dependencies
         working-directory: ./api
         run: npm install
-      - name: Serverless install
-        working-directory: ./api
-        run: npm config set prefix /usr/local && npm install -g serverless && serverless deploy
+      - name: Serverless deploy
+        uses: serverless/github-action@master
+        with:
+            args: deploy --config ./api/serverless.ts

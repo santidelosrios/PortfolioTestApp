@@ -101,7 +101,7 @@ const serverlessConfiguration: Serverless = {
         {
           http: {
             method: 'post',
-            path: 'user-portfolio/{id}',
+            path: 'user-portfolio',
             cors: true,
           }
         }
