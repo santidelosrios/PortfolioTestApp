@@ -1,9 +1,10 @@
 # PortfolioTestApp
 
-Zemoga test for NodeJS role. This applications consists of one UI based on React and an REST API in NodeJS deployed with Serverless Framework in a Lambda + API Gateway architecture. For the Database, it is using AWS' DynamoDB.
+Zemoga test for NodeJS role. This application consists of one UI based on React and a REST API in NodeJS deployed with Serverless Framework in a Lambda + API Gateway architecture. For the Database, it is using AWS' DynamoDB.
 
 ## UI
 To run the UI of this project, go the ui folder, install the dependencies and run the project.
+
 NOTE: make sure that port 3000 in your local machine is available.
 
 ```batch
@@ -13,9 +14,10 @@ npm run start
 ```
 
 ## API 
-The API is already deploy in AWS with two lambdas and exposed with an API Gateway.
+The API is already deployed in AWS with two lambdas that are exposed with an API Gateway.
 
 HOST: https://agspzq0cx8.execute-api.us-east-2.amazonaws.com/dev/
+
 Resource: /user-portfolio
 1. METHOD: GET; path params: {id}; PATH: /user-portfolio/{id}
 2. METHOD: PUT; path params: {id}; PATH: /user-portfolio/{id}; Expected body: 
@@ -24,7 +26,7 @@ Resource: /user-portfolio
   firstName: 'Mickey',
   lastName: 'Mouse',
   description: 'Lorem Impsun text to describe the portfolio of the user',
-  imageUrl: 'https://link.to.image.com
+  imageUrl: 'https://link.to.image.com'
   twitterUserName: 'username',
   title: 'Title for the Twitter's timeline header'
 }
@@ -67,7 +69,7 @@ To test how the development process works, follow these steps:
       {
         http: {
           method: 'post',
-          path: 'user-portfolio/{id},
+          path: 'user-portfolio/{id}',
           cors: true
         }
       }
