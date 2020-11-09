@@ -7,6 +7,10 @@ export const sendResponse = (response: any, statusCode: number): any => (
   {
     statusCode,
     body: JSON.stringify(response),
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true,
+    }
   }
 )
 
@@ -14,7 +18,7 @@ export const get: APIGatewayProxyHandler = async (event: APIGatewayEvent, _conte
   const id = event.pathParameters.id;
 
   try {
-    const userPortfolio: {twitterUserName: string, title: string, portfolioTweets: any[]} = await getUserPortfolio(id)
+    const userPortfolio = await getUserPortfolio(id)
     const userTweets = await getTweets(userPortfolio.twitterUserName, userPortfolio.title)
 
     userPortfolio.portfolioTweets = userTweets;
@@ -22,7 +26,13 @@ export const get: APIGatewayProxyHandler = async (event: APIGatewayEvent, _conte
     return sendResponse(userPortfolio, 200)
   
   } catch (err) {
-    sendResponse(err, 404)
+    let statusCode = 500
+    if(err.source === 'getUserPortfolio') {
+      statusCode = 404
+    }
+
+    delete err.source
+    return sendResponse(err, statusCode)
   }
 }
 
@@ -32,8 +42,16 @@ export const update: APIGatewayProxyHandler = async (event: APIGatewayEvent, _co
 
   try {
     await updateUserPortfolio(id, userPortfoltio)
-
+    
     return sendResponse({success: true}, 200);
+  } catch (err) {
+    return sendResponse(err, 400);
+  }
+}
+
+export const create: APIGatewayProxyHandler = async (event: APIGatewayEvent, _context: Context) => {
+  try {
+    return sendResponse({msg: 'New function POST'}, 200)
   } catch (err) {
     return sendResponse(err, 400);
   }

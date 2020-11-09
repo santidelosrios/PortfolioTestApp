@@ -1,4 +1,5 @@
 import aws from 'aws-sdk';
+import { AttributeMap } from 'aws-sdk/clients/dynamodb';
 import Twitter from 'twitter';
 import dotenv from 'dotenv'
 dotenv.config()
@@ -16,7 +17,10 @@ export const getTweets = async (userName: string, userTitle: string): Promise<an
   return new Promise((resolve, reject) => {
     twClient.get('statuses/user_timeline', {'screen_name': userName, 'count': 5}, (err, tweets: any[], _response) => {
       if (err) {
-        reject(err)
+        reject({
+          err,
+          source: 'getTweets'
+        })
       } else {
         const userTweets = tweets.map(tweet => {
           return {
@@ -32,7 +36,7 @@ export const getTweets = async (userName: string, userTitle: string): Promise<an
   })
 }
 
-export const getUserPortfolio = (id: string) => {
+export const getUserPortfolio = (id: string): Promise<any> => {
   const params = {
     TableName: 'user-portfolios',
     Key: {'id': id}
@@ -42,7 +46,12 @@ export const getUserPortfolio = (id: string) => {
     .get(params)
     .promise()
     .then(res => res.Item)
-    .catch(err => err)
+    .catch(err => {
+      return {
+        err, 
+        source: 'getUserPorfolio'
+      }
+    })
 }
 
 export const updateUserPortfolio = (id: string, userPorfolio: {firstName: string, lastName: string, description: string, imageUrl: string, title: string, twitterUserName: string}) => {
@@ -61,9 +70,6 @@ export const updateUserPortfolio = (id: string, userPorfolio: {firstName: string
       ":ti": userPorfolio.title,
     }
   }
-
-  console.log('This is the id: ', id)
-  console.log('This is the params: ', params)
 
   return dynamoDB
     .update(params)

@@ -29,3 +29,24 @@ jobs:
       - name: run tests
         working-directory: ./api
         run: npm run test
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      TW_CONSUMER_KEY: ${{ secrets.TW_CONSUMER_KEY }}
+      TW_CONSUMER_SECRET: ${{ secrets.TW_CONSUMER_SECRET }}
+      TW_ACCESS_TOKEN: ${{ secrets.TW_ACCESS_TOKEN }}
+      TW_ACCESS_TOKEN_SECRET: ${{ secrets.TW_ACCESS_TOKEN_SECRET }}
+    steps:
+      - uses: actions/checkout@v1
+      - name: install dependencies
+        working-directory: ./api
+        run: npm install
+      - name: Serverless deploy
+        working-directory: ./api
+        uses: serverless/github-action@v1.53.0
+        with:
+          args: deploy
+        run: ls

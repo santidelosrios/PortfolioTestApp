@@ -11,12 +11,12 @@ const Timeline = (props) => {
         return (
           <div className="timeline-body-tweet">
             <div className="tweet-img">
-              <img alt="tweet-avatar" src={logo} />
+              <img alt="tweet-avatar" src={tweet.tweetImg} />
             </div>
             <div className="tweet-text">
-              <b>{tweet.title}</b>
+              <b>{tweet.tweetTitle}</b>
               <br />
-              <p>{tweet.text}</p>
+              <p>{tweet.tweetText}</p>
             </div>
           </div>
         );

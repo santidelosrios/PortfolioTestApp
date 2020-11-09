@@ -35,15 +35,25 @@ export default class App extends React.PureComponent {
     super(props)
 
     this.state = {
-
+      avatarUrl: '',
+      firstName: '',
+      lastName: '',
+      title: '',
+      tweets: [],
     }
   }
 
   async componentDidMount() {
     const userPortfolio = await getUserPortfolio('1')
-    console.log('------------------------------------');
-    console.log(userPortfolio);
-    console.log('------------------------------------');
+
+    this.setState({
+      avatarUrl: userPortfolio.imageUrl,
+      firstName: userPortfolio.firstName,
+      lastName: userPortfolio.lastName,
+      tweets: userPortfolio.portfolioTweets,
+      description: userPortfolio.description,
+    })
+    
   }
 
   render() {
@@ -54,15 +64,15 @@ export default class App extends React.PureComponent {
       </header>
       <div className="App-content">
         <div className="left-panel">
-          <Avatar imgSrc={logo} />
-          <Timeline firstName={"Jhon"} tweets={tweets} />
+          <Avatar imgSrc={this.state.avatarUrl} />
+          <Timeline firstName={this.state.firstName} tweets={this.state.tweets} />
         </div>
         <div className="right-panel">
           <Experience
-            fullName={"Jhon Snow"}
+            fullName={`${this.state.firstName} ${this.state.lastName}`}
             experienceTitle={"My Work experience"}
           >
-            <p>{experience}</p>
+            <p>{this.state.description}</p>
           </Experience>
         </div>
       </div>
